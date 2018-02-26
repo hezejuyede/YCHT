@@ -78,9 +78,11 @@ app.post('/admLogin',admRouter.admLogin);
 app.get('/admUserOrder',admRouter.userOrder);
 app.get('/admUserOrderDetail',admRouter.admUserOrderDetail);
 app.get('/admproduct', admRouter.admProduct);
-app.get('/admProductDetails/:id',admRouter.admProductDetails);
+app.get('/admProductDetails',admRouter.admProductDetails);
 app.get('/admUserList',admRouter.userList);
-
+app.get('/admProductAll',admRouter.admProductAll);
+app.post('/admAddProduct',admRouter.admAddProduct);
+                                                 
 
 
 
