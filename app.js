@@ -18,6 +18,7 @@ app.use(sesssion({                                    //使用session中间件
 
 app.set("view engine", "ejs");                         //使用EJS模板
 app.use(express.static("./public"));                   //静态PUBLIC
+app.use(express.static("./HT"));                       //静态后台
 app.use("/avatar", express.static("./avatar"));        //静态avatar
 
 
@@ -73,18 +74,21 @@ app.post('/searchGoods',indexrourer.searchGoods);
 
 
 //后台管理系统请求
+app.get('/HTSystem',admRouter.HTSystem);
+app.get('/MobileYSX',admRouter.MobileYSX);
+app.get('/PCYSX',admRouter.PCYSX);
 app.post('/admRegester',admRouter.admRegester);
 app.post('/admLogin',admRouter.admLogin);
 app.get('/admUserOrder',admRouter.userOrder);
 app.get('/admUserOrderDetail',admRouter.admUserOrderDetail);
-app.get('/admproduct', admRouter.admProduct);
-app.get('/admProductDetails',admRouter.admProductDetails);
 app.get('/admUserList',admRouter.userList);
+
 app.get('/admProductAll',admRouter.admProductAll);
 app.post('/admAddProduct',admRouter.admAddProduct);
-                                                 
+app.get('/admproduct', admRouter.admProduct);
+app.get('/admProductDetails',admRouter.admProductDetails);
 
-
+app.post('/admDeleteProduct',admRouter.admDeleteProduct);
 
 app.listen(3000);                                 //监听3000端口
 console.log("SERVER START");                     //控制台打印服务器成功启动信息

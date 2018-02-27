@@ -9677,15 +9677,58 @@ exports.admAddProduct = (req, res, next) => {
                     }, (err, result) => {
                         if (err) {
                             console.log(err);
-                            res.json(-1)
+                            res.json("-1")
                         }
                         else {
-                            res.json(1)
+                            res.json("1")
                         }
                     })
             }
         }))
 
     })
+};
+
+exports.admDeleteProduct = (req, res, next) => {
+    const form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields) {
+        const i = fields.index;
+        const id = fields.id;
+        mongodb.find('P-ProductList',{"id":id},((err,result)=>{
+            if(err){
+                console.log(err);
+            }
+            else {
+                let goodsImg =result[0].goodsImg;
+
+                goodsImg.splice(i,1);
+                console.log(goodsImg);
+                mongodb.updateMany('P-ProductList', {"id": id},
+                    {
+                        $set: {"goodsImg": goodsImg}
+                    }, (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            res.json("-1")
+                        }
+                        else {
+                            res.json("1")
+                        }
+                    })
+            }
+        }))
+
+    })
+
+};
+
+exports.HTSystem = (req, res, next) => {
+    res.render("HT")
+};
+exports.MobileYSX = (req, res, next) => {
+    res.render("Mobile")
+};
+exports.PCYSX = (req, res, next) => {
+    res.render("PC")
 };
 
