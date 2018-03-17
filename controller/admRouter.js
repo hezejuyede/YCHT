@@ -89,18 +89,219 @@ const userOrder = [
         orderTime: "2018-1-21 16:08:08"
     }
 ];
+
 const OrderDetail = [
     {
-        orderInfo: [{
-            orderNumber: '12345678909',
-            orderTime: '2018-02-14,08:08:08',
-            name: "七七",
-            phoneNumber: "15550739985",
-            address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
-            orderState: "已付款",
-            orderStyle: "在线支付",
-            orderAmount: "￥199",
-        }],
+
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "未付款",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
+        orderDetail: [
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥191',
+                number: '1',
+                hj: '191'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/2.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥192',
+                number: '1',
+                hj: '192'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/3.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥193',
+                number: '1',
+                hj: '193'
+            }
+        ]
+    },
+    {
+
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "待退款",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
+        orderDetail: [
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥191',
+                number: '1',
+                hj: '191'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/2.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥192',
+                number: '1',
+                hj: '192'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/3.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥193',
+                number: '1',
+                hj: '193'
+            }
+        ]
+    },
+    {
+
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "已关闭",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
+        orderDetail: [
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥191',
+                number: '1',
+                hj: '191'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/2.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥192',
+                number: '1',
+                hj: '192'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/3.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥193',
+                number: '1',
+                hj: '193'
+            }
+        ]
+    },
+    {
+
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "已退款",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
+        orderDetail: [
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥191',
+                number: '1',
+                hj: '191'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/2.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥192',
+                number: '1',
+                hj: '192'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/3.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥193',
+                number: '1',
+                hj: '193'
+            }
+        ]
+    },
+    {
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "已发货",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
+        orderDetail: [
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥191',
+                number: '1',
+                hj: '191'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/2.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥192',
+                number: '1',
+                hj: '192'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/3.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥193',
+                number: '1',
+                hj: '193'
+            }
+        ]
+    },
+    {
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "未评价",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
+        orderDetail: [
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥191',
+                number: '1',
+                hj: '191'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/2.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥192',
+                number: '1',
+                hj: '192'
+            },
+            {
+                img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/3.jpg',
+                title: '亿成优生鲜 爱尔兰面包蟹（1000-800g*2只）熟冻黄金蟹 海鲜 螃蟹',
+                pirce: '￥193',
+                number: '1',
+                hj: '193'
+            }
+        ]
+    },
+    {
+        orderNumber: '12345678909',
+        orderTime: '2018-02-14,08:08:08',
+        name: "七七",
+        phoneNumber: "15550739985",
+        address: "山东省菏泽市巨野县永丰街道办事处健康路77号",
+        orderState: "已评价",
+        orderStyle: "在线支付",
+        orderAmount: "￥199",
         orderDetail: [
             {
                 img: 'http://www.ilqiqi.top/pc/img/gooddatails/crab/brown_cab/1.jpg',
@@ -125,69 +326,9 @@ const OrderDetail = [
             }
         ]
     }
+
 ];
-const admProduct = [
-    {
-        id: '001',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥191',
-        state: 'true'
-    },
-    {
-        id: '002',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥192',
-        state: 'true'
-    },
-    {
-        id: '003',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥193',
-        state: 'true'
-    },
-    {
-        id: '004',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥194',
-        state: 'true'
-    },
-    {
-        id: '005',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥195',
-        state: 'true'
-    },
-    {
-        id: '006',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥196',
-        state: 'true'
-    },
-    {
-        id: '007',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥197',
-        state: 'true'
-    },
-    {
-        id: '008',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥198',
-        state: 'true'
-    },
-    {
-        id: '009',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥199',
-        state: 'true'
-    },
-    {
-        id: '010',
-        title: '聚福鲜 冷冻智利三文鱼刺身 500g 袋装 海鲜年货 生鱼片',
-        price: '￥190',
-        state: 'true'
-    }
-];
+
 const userList = [
     {
         id: '001',
@@ -259,10 +400,7 @@ const userList = [
         iphoneNumber: '15550739985',
         registerTime: '2018-01:10:10，10:10:10'
     }
-];
-
-
-
+    ];
 
 const productList =[
     {
@@ -9488,11 +9626,6 @@ const productList =[
     }
 ];
 
-
-
-
-
-
 //管理员注册
 exports.admRegester = (req, res, next) => {
 
@@ -9514,7 +9647,8 @@ exports.admRegester = (req, res, next) => {
                     "username": fields.username1,
                     "password": password1,
                     "phone": fields.phoneNumber,
-                    "avatar": "avatar.jpg",
+                    "avatar": "http://www.ilqiqi.top/pc/img/content/content_banner/no_login.jpg",
+                    "userId":"优生鲜"
                 }, function (err, rusult) {
                     if (err) {
                         res.send("-1");
@@ -9534,7 +9668,7 @@ exports.admRegester = (req, res, next) => {
 
 
 //管理员登录
-exports.admLogin = (req, res, next)=> {
+exports.admLogin = (req, res, next) => {
 
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields) {
@@ -9550,10 +9684,14 @@ exports.admLogin = (req, res, next)=> {
                 req.session.login = "1";
                 req.session.username = rusult[0].username;
                 req.session.useravatar = rusult[0].avatar;
+                req.session.phoneNumber = rusult[0].phone;
+                req.session.userId = rusult[0].userId;
                 res.send({
                     login: req.session.login,
                     username: req.session.username,
-                    useravatar: req.session.useravatar
+                    useravatar: req.session.useravatar,
+                    phoneNumber: req.session.phoneNumber,
+                    userID: req.session.userId
                 });
                 return;
             }
@@ -9565,162 +9703,622 @@ exports.admLogin = (req, res, next)=> {
 };
 
 exports.userOrder = (req, res, next) => {
-    mongodb.find("userOrder", {}, {"pageamount": 2, "page": 0}, (err, result) => {
-        if (err) {
-            res.send(err)
-        }
-        else {
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看")
 
-            res.json(result)
-        }
-    })
+    } else {
+        mongodb.find("userOrder", {}, (err, result) => {
+            if (err) {
+                res.send(err)
+            }
+            else {
+
+                let length =result.length;
+                mongodb.find('userOrder',{},{"pageamount": 2, "page": 0},(err, result) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+                        res.json({
+                            result:result,
+                            length:length
+                        })
+                    }
+
+                });
+            }
+        })
+    }
 
 };
 
-exports.admUserOrderDetail = (req, res, next)=> {
-    let id = req.query.id;
+exports.admUserOrderDetail = (req, res, next) => {
+    if (req.session.login != "1") {
 
-    mongodb.find("userOrder", {"orderNumber":id}, (err, result) => {
-        if (err) {
-            res.send(err)
-        }
-        else {
-            res.json(result)
-        }
-    })
+        res.send("只有登录才有资格查看")
+    }
+    else {
+
+        let id = req.query.id;
+
+        mongodb.find("userOrder", {"orderNumber": id}, (err, result) => {
+            if (err) {
+                res.send(err)
+            }
+            else {
+                res.json(result)
+            }
+        })
+    }
 
 };
 
 exports.admProduct = (req, res, next) => {
-    let id = req.query.id;
-    mongodb.find('P-ProductList', {"id":id}, ((err, result) => {
-        res.json(result);
-    }))
-};
+    if (req.session.login != "1") {
 
-exports.admProductDetails = (req, res, next)=> {
-    let id = req.query.id;
-    console.log(id)
+        res.send("只有登录才有资格查看")
+    } else {
 
-    
-
-    mongodb.find('P-ProductList',{"id":id},((err,result)=>{
-        if(err){
-            console.log(err)
-        }
-        else {
-
-
-            res.json(result)
-        }
-
-
-    }))
+        let id = req.query.id;
+        mongodb.find('P-ProductList', {"id": id}, ((err, result) => {
+            res.json(result);
+        }))
+    }
 
 };
 
-exports.userList = (req, res, next) => {
-    mongodb.find("userinfos", {}, {"pageamount": 2, "page": 0}, (err, result) => {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            res.json(result)
-        }
-    })
+exports.admProductDetails = (req, res, next) => {
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看")
+
+    } else {
+        let id = req.query.id;
+        mongodb.find('P-ProductList', {"id": id}, ((err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+
+
+                res.json(result)
+            }
+
+
+        }))
+    }
+
+
+};
+
+exports.admFindProduct=(req, res, next) => {
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看")
+
+    }
+    else {
+        let id = req.query.id;
+        let name = req.query.name;
+        mongodb.find('P-ProductList', {"id": id}, ((err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+
+
+                res.json(result)
+            }
+
+
+        }))
+    }
+
+
+};
+
+
+exports.admUserList = (req, res, next) => {
+
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看")
+
+    }
+    else {
+        let page = req.query.page;
+        mongodb.find("userinfos", {}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                let length = result.length;
+                mongodb.find("userinfos", {}, {"pageamount": 2, "page": page}, (err, result) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+                        res.json({
+                            result: result,
+                            length: length
+                        })
+                    }
+                })
+            }
+        })
+    }
+
 
 };
 
 exports.admProductAll = (req, res, next) => {
-    mongodb.find('P-ProductList', {}, (err, result) => {
-        res.json(result)
+    if (req.session.login != "1") {
 
-    })
+        res.send("只有登录才有资格查看");
+    } else {
+
+        mongodb.find('P-ProductList', {}, (err, result) => {
+            res.json(result)
+
+        })
+    }
+
 };
 
 exports.admAddProduct = (req, res, next) => {
-    const form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields) {
-        const str = fields.str;
-        const fl = fields.fl;
-        mongodb.find('P-ProductList',{"goodsName":fl},((err,result)=>{
-            if(err){
-                console.log(err);
-            }
-            else {
-                let goodsImg =result[0].goodsImg;
-                let a = [];
-                let b = [];
-                let c = [];
-                let d = [];
-                let e = [];
-                let f = [];
-                a.push(str);
-                let goodsInfo = {
-                    "img":fields.img,
-                    "title":fields.name,
-                    "id":fields.id,
-                    "price":fields.price,
-                    "number":fields.number,
-                    "state":fields.state,
-                    "goodsInfo":a,
-                    "smallImg":b,
-                    "bigImg":c,
-                    "productImg":d,
-                    "details":e,
-                    "showBottom":f
-                };
-                goodsImg.push(goodsInfo);
-                mongodb.updateMany('P-ProductList', {"goodsName": fl},
-                    {
-                        $set:{ "goodsImg":goodsImg}
-                    }, (err, result) => {
-                        if (err) {
-                            console.log(err);
-                            res.json("-1")
-                        }
-                        else {
-                            res.json("1")
-                        }
-                    })
-            }
-        }))
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看");
 
-    })
+    } else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            const str = fields.str;
+            const fl = fields.fl;
+            mongodb.find('P-ProductList', {"goodsName": fl}, ((err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    let goodsImg = result[0].goodsImg;
+                    let a = [];
+                    let b = [];
+                    let c = [];
+                    let d = [];
+                    let e = [];
+                    let f = [];
+                    a.push(str);
+                    let goodsInfo = {
+                        "img": fields.img,
+                        "title": fields.name,
+                        "id": fields.id,
+                        "price": fields.price,
+                        "number": fields.number,
+                        "state": fields.state,
+                        "goodsInfo": a,
+                        "smallImg": b,
+                        "bigImg": c,
+                        "productImg": d,
+                        "details": e,
+                        "showBottom": f
+                    };
+                    goodsImg.push(goodsInfo);
+                    mongodb.updateMany('P-ProductList', {"goodsName": fl},
+                        {
+                            $set: {"goodsImg": goodsImg}
+                        }, (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.json("-1")
+                            }
+                            else {
+                                res.json("1")
+                            }
+                        })
+                }
+            }))
+
+        })
+    }
+
 };
 
 exports.admDeleteProduct = (req, res, next) => {
-    const form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields) {
-        const i = fields.index;
-        const id = fields.id;
-        mongodb.find('P-ProductList',{"id":id},((err,result)=>{
-            if(err){
-                console.log(err);
-            }
-            else {
-                let goodsImg =result[0].goodsImg;
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看")
 
-                goodsImg.splice(i,1);
-                console.log(goodsImg);
-                mongodb.updateMany('P-ProductList', {"id": id},
-                    {
-                        $set: {"goodsImg": goodsImg}
-                    }, (err, result) => {
-                        if (err) {
-                            console.log(err);
-                            res.json("-1")
-                        }
-                        else {
-                            res.json("1")
-                        }
-                    })
-            }
-        }))
+    } else {
 
-    })
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            const i = fields.index;
+            const id = fields.id;
+            mongodb.find('P-ProductList', {"id": id}, ((err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    let goodsImg = result[0].goodsImg;
+
+                    goodsImg.splice(i, 1);
+                    console.log(goodsImg);
+                    mongodb.updateMany('P-ProductList', {"id": id},
+                        {
+                            $set: {"goodsImg": goodsImg}
+                        }, (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.json("-1")
+                            }
+                            else {
+                                res.json("1")
+                            }
+                        })
+                }
+            }))
+
+        })
+    }
+
 
 };
+
+
+exports.admProductClassify = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('P-ProductList', {}, (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.json(result)
+            }
+        })
+    }
+
+};
+
+exports.admProductNumber = (req, res, next)=>{
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('P-ProductList', {}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                let goods = 0;
+                for (let i = 0; i < result.length; i++) {
+                    goods += result[i].goodsImg.length
+
+                }
+                res.json(goods)
+            }
+        })
+    }
+
+};
+
+exports.admUserNumber= (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('userinfos', {}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json(result.length)
+            }
+        })
+    }
+
+};
+
+exports.admOrderNumber = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('userOrder', {}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json(result.length)
+
+            }
+        });
+    }
+};
+
+exports.admOrderWFK = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('userOrder', {"orderState":"未付款"}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json(result)
+
+            }
+        });
+    }
+};
+
+exports.admOrderDFH = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('userOrder', {"orderState":"已付款"}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json(result)
+
+            }
+        });
+    }
+};
+
+exports.admOrderDTK = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    } else {
+        mongodb.find('userOrder', {"orderState":"待退款"}, (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.json(result)
+
+            }
+        });
+    }
+};
+
+exports.admOrderState = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+
+        let selectValue = req.query.select;
+        let page = req.query.page;
+
+        let searchValue = req.query.search;
+
+        if (searchValue == "" && selectValue !== "") {
+            mongodb.find('userOrder', {"orderState": selectValue}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    let length =result.length;
+                    mongodb.find('userOrder', {"orderState": selectValue},  {"pageamount": 2, "page": page},(err, result) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                        else {
+                            res.json({
+                                result:result,
+                                length:length
+                            })
+                        }
+
+                    });
+
+                }
+
+            });
+        }
+        else if (searchValue !== "") {
+            mongodb.find('userOrder', {"orderNumber": searchValue}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    res.json(result)
+
+                }
+            });
+        }
+        else if (searchValue == "" && selectValue == "") {
+            mongodb.find("userOrder", {},  (err, result) => {
+                if (err) {
+                    res.send(err)
+                }
+                else {
+                    let length =result.length;
+                    mongodb.find('userOrder', {},  {"pageamount": 2, "page": page},(err, result) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                        else {
+                            res.json({
+                                result:result,
+                                length:length
+                            })
+                        }
+
+                    });
+
+                }
+            })
+        }
+
+    }
+};
+
+exports.admChangeOrderState = (req, res, next) => {
+    if (req.session.login != "1") {
+        res.send("只有登录才有资格查看")
+
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            const State = fields.State;
+            console.log(State)
+            const id = fields.id;
+            console.log(id)
+            mongodb.updateMany('userOrder', {"orderNumber": id},
+                {
+                    $set: {"orderState": State}
+                }, (err, result) => {
+                    if (err) {
+                        res.json("-1")
+                    }
+                    else {
+                       
+                        res.json("1")
+                        console.log(result)
+                    }
+                })
+
+        })
+    }
+};
+
+exports.admUserInfos = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let username = fields.username;
+
+            mongodb.find('admInfos', {"username":username}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    let id = result[0].userId;
+                    let phoneNumber = result[0].phone;
+                    res.send({
+                        id:id,
+                        phoneNumber:phoneNumber
+                    })
+                    
+                }
+            });
+        })
+    }
+};
+
+exports.admChangeUserID = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            mongodb.updateMany('admInfos', {"username": username}, {
+                $set: {"userId": id}
+            }, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+
+                    res.json("1")
+
+                }
+            })
+        })
+    }
+};
+
+exports.admChangePassWord = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let password = fields.password1;
+            let password2 = fields.password2;
+            password = md5((md5(password).substr(4, 7) + md5(password)));
+            password2 = md5((md5(password2).substr(4, 7) + md5(password2)));
+            mongodb.find("admInfos", {"username": fields.username}, (err, rusult) => {
+                if (rusult.length == 0) {
+                    res.send("2");
+                    return
+                }
+                var mongodbpassword = rusult[0].password;
+                if (mongodbpassword == password) {
+                    mongodb.updateMany('admInfos', {"username": fields.username},
+                        {
+                            $set: {"password": password2}
+                        },
+                        (err, result) => {
+                            if (err) {
+                                console.log(err)
+                            }
+                            else {
+
+                                res.json("1")
+
+                            }
+                        }
+                    )
+
+                }
+                else {
+                    res.send("-1")
+                }
+            })
+            
+            
+            
+
+
+        })
+    }
+};
+
+exports.admChangePhoneNumber = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let username = fields.username;
+            let PhoneNumber = fields.PhoneNumber;
+            mongodb.updateMany('admInfos', {"username": username},
+                {
+                    $set: {"phone": PhoneNumber}
+                },
+                (err, result) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+
+                        res.json("1")
+
+                    }
+                }
+            )
+        })
+    }
+};
+
+
 
 exports.HTSystem = (req, res, next) => {
     res.render("HT")

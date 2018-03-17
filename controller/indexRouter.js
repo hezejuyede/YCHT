@@ -2791,6 +2791,7 @@ const MgoodsDetails = [{
 
 
 }];
+
 const rightLists = [
     {
         img: "http://www.ilqiqi.top/images/mYc/goods/crad/11.jpg",
@@ -3644,9 +3645,10 @@ exports.pcGoodsList = (req, res, next)=> {
 exports.userSay = (req, res, next)=> {
     res.json(userSay)
 };
-exports.shoppingCart = (req, res, next)=> {
-    res.json(shoppingCart)
-};
+
+
+
+
 exports.myAddress = (req, res, next)=> {
     res.json(myAddress)
 };
@@ -3654,9 +3656,42 @@ exports.userInfo = (req, res, next)=> {
     res.json(userInfo)
 };
 exports.productDetails = (req, res, next)=> {
+
     res.json(productDetails)
 };
 
+
+
+exports.goodsList = (req, res, next) => {
+    mongodb.find('P-ProductList', {}, ((err, result) => {
+        res.json(result);
+    }))
+};
+
+exports.MobileGoodsDetails = (req, res, next) => {
+    let id = req.query.id;
+    let index = req.query.index;
+    if (id === undefined || index === undefined) {
+       res.json("-1")
+    }
+    else {
+        mongodb.find('P-ProductList', {id: id}, ((err, result) => {
+            if (err) {
+                res.json("-1")
+            }
+            else {
+
+                let goods = result[0].goodsImg;
+                let goodsDetails = goods[index];
+                console.log(goodsDetails);
+
+                res.json(goodsDetails);
+            }
+
+        }))
+    }
+
+};
 
 
 
@@ -3671,16 +3706,12 @@ exports.jx = (req, res, next)=> {
         }
     })
 };
-exports.goodsList = (req, res, next)=> {
-  /*  mongodb.find("rightLists",{},(err,result)=>{
-        if(err){
-            res.send(err)
-        }
-        else {
-            res.json(result)
-        }
-    })*/
-  res.json(rightLists)
+
+
+exports.goodsList = (req, res, next) => {
+    mongodb.find('P-ProductList', {}, ((err, result) => {
+        res.json(result);
+    }))
 };
 
 exports.banner = (req, res, next) => {

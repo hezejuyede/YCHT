@@ -35,12 +35,16 @@ app.get('/api/tsBuy', indexrourer.tsbuy);
 app.get('/api/pcRecommend', indexrourer.pcRecommend);
 app.get('/api/pcGoodsList', indexrourer.pcGoodsList);
 app.get('/api/userSay', indexrourer.userSay);
-app.get('/api/shoppingCart',indexrourer.shoppingCart);
+app.post('/api/shoppingCart',userrouter.shoppingCart);
 app.get('/api/myAddress',indexrourer.myAddress);
 app.get('/api/userInfo',indexrourer.userInfo);
 app.get('/api/productDetails',indexrourer.productDetails);
 app.post("/api/userRegister",userrouter.userRegister);
 app.post("/api/userlogin",userrouter.userlogin);
+
+
+
+
 
 
 
@@ -66,10 +70,29 @@ app.get("/leftLists",indexrourer.leftLists);
 
 app.get('/rightLists', indexrourer.rightLists);
 
-app.get('/shoppingCart', indexrourer.shoppingCart);
-app.get('/goodsDetails',indexrourer.productDetails);
-app.get('/MUserInfos',indexrourer.MuserInfos);
-app.post('/searchGoods',indexrourer.searchGoods);
+
+app.post('/getUserAddressList', userrouter.getUserAddressList);
+app.post('/setUserAddressList', userrouter.setUserAddressList);
+app.post('/deleteUserAddressList', userrouter.deleteUserAddressList);
+app.post('/updateUserAddressList', userrouter.updateUserAddressList);
+app.post('/mrUserAddressList', userrouter.mrUserAddressList);
+
+
+
+app.get('/MobileGoodsDetails', indexrourer.MobileGoodsDetails);
+app.get('/MUserInfos', indexrourer.MuserInfos);
+app.post('/searchGoods', indexrourer.searchGoods);
+
+
+app.post('/shoppingCart', userrouter.shoppingCart);
+app.post('/MobileUserAddProduct',userrouter.MobileUserAddProduct);
+app.post('/MobileUserPayment',userrouter.MobileUserPayment);
+
+
+
+
+
+
 
 
 
@@ -77,18 +100,33 @@ app.post('/searchGoods',indexrourer.searchGoods);
 app.get('/HTSystem',admRouter.HTSystem);
 app.get('/MobileYSX',admRouter.MobileYSX);
 app.get('/PCYSX',admRouter.PCYSX);
+
+
 app.post('/admRegester',admRouter.admRegester);
 app.post('/admLogin',admRouter.admLogin);
 app.get('/admUserOrder',admRouter.userOrder);
 app.get('/admUserOrderDetail',admRouter.admUserOrderDetail);
-app.get('/admUserList',admRouter.userList);
+app.get('/admUserList',admRouter.admUserList);
 
-app.get('/admProductAll',admRouter.admProductAll);
-app.post('/admAddProduct',admRouter.admAddProduct);
+app.get('/admProductAll', admRouter.admProductAll);
+app.post('/admAddProduct', admRouter.admAddProduct);
 app.get('/admproduct', admRouter.admProduct);
-app.get('/admProductDetails',admRouter.admProductDetails);
-
-app.post('/admDeleteProduct',admRouter.admDeleteProduct);
+app.get('/admProductDetails', admRouter.admProductDetails);
+app.get('/admProductClassify', admRouter.admProductClassify);
+app.get('/admFindProduct', admRouter.admFindProduct);
+app.get('/admUserNumber', admRouter.admUserNumber);
+app.get('/admOrderNumber', admRouter.admOrderNumber);
+app.get('/admProductNumber', admRouter.admProductNumber);
+app.get('/admOrderWFK', admRouter.admOrderWFK);
+app.get('/admOrderDFH', admRouter.admOrderDFH);
+app.get('/admOrderDTK', admRouter.admOrderDTK);
+app.get('/admOrderState', admRouter.admOrderState);
+app.post('/admChangeOrderState', admRouter.admChangeOrderState);
+app.post('/admUserInfos', admRouter.admUserInfos);
+app.post('/admDeleteProduct', admRouter.admDeleteProduct);
+app.post("/admChangeUserID", admRouter.admChangeUserID);
+app.post("/admChangePassWord", admRouter.admChangePassWord);
+app.post("/admChangePhoneNumber", admRouter.admChangePhoneNumber);
 
 app.listen(3000);                                 //监听3000端口
 console.log("SERVER START");                     //控制台打印服务器成功启动信息
