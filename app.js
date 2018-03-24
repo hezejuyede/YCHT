@@ -21,10 +21,86 @@ app.use(express.static("./public"));                   //静态PUBLIC
 app.use(express.static("./HT"));                       //静态后台
 app.use("/avatar", express.static("./avatar"));        //静态avatar
 
+//后台系统网站
+app.get('/HTSystem', (req, res, next) => {
+    res.render("H");
+});
+//移动端网站
+app.get('/MobileYSX', (req, res, next) => {
+    res.render("M")
+});
+//PC端网站
+app.get('/PcYSX', (req, res, next) => {
+    res.render("P")
+});
 
-//公共部分
-app.post("/userRegister",userrouter.userRegister);  //用户注册
-app.post("/userlogin",userrouter.userlogin);        //用户登录
+
+
+
+
+
+
+
+
+
+
+
+//公共部分（客户端）
+app.post("/userRegister", userrouter.userRegister);  //用户注册
+app.post("/userlogin", userrouter.userlogin);        //用户登录
+
+
+app.post('/shoppingCart', userrouter.shoppingCart);  //获得购物车
+app.post('/api/shoppingCart', userrouter.shoppingCart);  //获得购物车
+app.post('/MobileUserAddProduct',userrouter.MobileUserAddProduct); //添加到购物车
+app.post('/api/MobileUserAddProduct',userrouter.MobileUserAddProduct); //添加到购物车
+
+app.post('/setFollowGoods',userrouter.setFollowGoods); //添加收藏
+app.post('/api/setFollowGoods',userrouter.setFollowGoods); //添加到收藏
+
+app.post('/MobileUserPayment',userrouter.MobileUserPayment); //付款页面
+app.post('/api/MobileUserPayment',userrouter.MobileUserPayment); //付款页面
+
+
+
+app.post('/getUserAddressList', userrouter.getUserAddressList);            //获得用户地址
+app.post('/setUserAddressList', userrouter.setUserAddressList);            //新增用户地址
+app.post('/deleteUserAddressList', userrouter.deleteUserAddressList);      //删除用户地址
+app.post('/updateUserAddressList', userrouter.updateUserAddressList);      //修改用户地址
+app.post('/mrUserAddressList', userrouter.mrUserAddressList);              //设置默认地址
+
+app.post('/api/getUserAddressList', userrouter.getUserAddressList);            //获得用户地址
+app.post('/api/setUserAddressList', userrouter.setUserAddressList);            //新增用户地址
+app.post('/api/deleteUserAddressList', userrouter.deleteUserAddressList);      //删除用户地址
+app.post('/api/updateUserAddressList', userrouter.updateUserAddressList);      //修改用户地址
+app.post('/api/mrUserAddressList', userrouter.mrUserAddressList);              //设置默认地址
+
+
+
+app.post('/UserChangeAvatar', userrouter.UserChangeAvatar);      //修改头像
+app.post('/UserChangePhone', userrouter.UserChangePhone);        //修改手机号
+app.post('/UserChangeID', userrouter.UserChangeID);              //修改ID
+app.post('/UserChangeSex', userrouter.UserChangeSex);            //修改性别
+app.post('/UserChangeAge', userrouter.UserChangeAge);            //修改年龄
+app.post('/UserChangeEmail', userrouter.UserChangeEmail);        //修改邮箱
+app.post('/UserChangePassWord', userrouter.UserChangePassWord);  //修改密码
+
+
+app.post('/api/UserChangeAvatar', userrouter.UserChangeAvatar);      //修改头像
+app.post('/api/UserChangePhone', userrouter.UserChangePhone);        //修改手机号
+app.post('/api/UserChangeID', userrouter.UserChangeID);              //修改ID
+app.post('/api/UserChangeSex', userrouter.UserChangeSex);            //修改性别
+app.post('/api/UserChangeAge', userrouter.UserChangeAge);            //修改年龄
+app.post('/api/UserChangeEmail', userrouter.UserChangeEmail);        //修改邮箱
+app.post('/api/UserChangePassWord', userrouter.UserChangePassWord);  //修改密码
+
+
+
+
+
+
+
+
 
 //PC端请求的数据
 app.get("/api/banner",indexrourer.banner);
@@ -51,42 +127,60 @@ app.post("/api/userlogin",userrouter.userlogin);
 //移动端请求的数据
 app.get("/banner",indexrourer.banner);
 app.get('/headerLine', indexrourer.headerLine);
-app.get('/recommend', indexrourer.recommend);
 app.get('/jx', indexrourer.jx);
 
+
+
+
+app.get('/recommend', indexrourer.recommend);
+app.get('/api/recommend', indexrourer.recommend);
+
+
+
+
 app.get('/tuijian', indexrourer.tuijian);
+app.get('/api/tuijian', indexrourer.tuijian);
 
 app.get('/hotSell', indexrourer.hotSell);
+app.get('/api/hotSell', indexrourer.hotSell);
 
 app.get('/chujian', indexrourer.chujian);
+app.get('/api/chujian', indexrourer.chujian);
 
 app.get('/goodsList', indexrourer.goodsList);
+app.get('/api/goodsList', indexrourer.goodsList);
 
 app.get("/search",indexrourer.search);
+app.get("/api/search",indexrourer.search);
 
 app.get('/hot', indexrourer.hot);
+app.get('/api/hot', indexrourer.hot);
 
 app.get("/leftLists",indexrourer.leftLists);
-
+app.get("/api/leftLists",indexrourer.leftLists);
 app.get('/rightLists', indexrourer.rightLists);
-
-
-app.post('/getUserAddressList', userrouter.getUserAddressList);
-app.post('/setUserAddressList', userrouter.setUserAddressList);
-app.post('/deleteUserAddressList', userrouter.deleteUserAddressList);
-app.post('/updateUserAddressList', userrouter.updateUserAddressList);
-app.post('/mrUserAddressList', userrouter.mrUserAddressList);
-
-
+app.get('/api/rightLists', indexrourer.rightLists);
 
 app.get('/MobileGoodsDetails', indexrourer.MobileGoodsDetails);
+app.get('/api/MobileGoodsDetails', indexrourer.MobileGoodsDetails);
+
 app.get('/MUserInfos', indexrourer.MuserInfos);
+app.get('/api/MUserInfos', indexrourer.MuserInfos);
+
 app.post('/searchGoods', indexrourer.searchGoods);
+app.post('/api/searchGoods', indexrourer.searchGoods);
 
+app.post('/userOrderPJ',userrouter.userOrderPJ);
+app.post('/api/userOrderPJ',userrouter.userOrderPJ);
 
-app.post('/shoppingCart', userrouter.shoppingCart);
-app.post('/MobileUserAddProduct',userrouter.MobileUserAddProduct);
-app.post('/MobileUserPayment',userrouter.MobileUserPayment);
+app.post('/userBalance',userrouter.userBalance);
+app.post('/api/userBalance',userrouter.userBalance);
+
+app.post('/userBalance',userrouter.userBalance);
+app.post('/api/userBalance',userrouter.userBalance);
+
+app.get('/getUserInfo',userrouter.getUserInfo);
+app.get('/api/getUserInfo',userrouter.getUserInfo);
 
 
 
@@ -97,9 +191,6 @@ app.post('/MobileUserPayment',userrouter.MobileUserPayment);
 
 
 //后台管理系统请求
-app.get('/HTSystem',admRouter.HTSystem);
-app.get('/MobileYSX',admRouter.MobileYSX);
-app.get('/PCYSX',admRouter.PCYSX);
 
 
 app.post('/admRegester',admRouter.admRegester);

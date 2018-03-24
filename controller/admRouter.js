@@ -10320,13 +10320,4 @@ exports.admChangePhoneNumber = (req, res, next) => {
 
 
 
-exports.HTSystem = (req, res, next) => {
-    res.render("HT")
-};
-exports.MobileYSX = (req, res, next) => {
-    res.render("Mobile")
-};
-exports.PCYSX = (req, res, next) => {
-    res.render("PC")
-};
 

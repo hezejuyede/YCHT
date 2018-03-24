@@ -3628,6 +3628,129 @@ const rightLists = [
     },
 ];
 
+const chjian =[
+    {
+
+        "img": "http://www.ilqiqi.top/images/mYc/jx/11.jpg",
+        "price": "299",
+        "title": "黄河口大闸蟹",
+        "number": 10.0,
+        "id": "PXL",
+        "sindex": 9,
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/12.jpg",
+        "price" : "297",
+        "title" : "琵琶大鸡腿",
+        "id": "JXL",
+        "sindex": 8,
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/13.jpg",
+        "price" : "298",
+        "title" : "野生野猪肉",
+        "id": "ZRL",
+        "sindex": 8
+    }
+
+
+]
+
+const tuijian =[
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/1.jpg",
+        "price" : "290",
+        "title" : "亿成优生鲜精选",
+        "id": "JXL",
+        "sindex": 0
+
+    },
+    {
+       
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/2.jpg",
+        "price" : "291",
+        "title" : "亿成优生鲜精选",
+        "id": "XYL",
+        "sindex": 1
+
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/3.jpg",
+        "price" : "292",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "YXL",
+        "sindex": 0
+
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/4.jpg",
+        "price" : "293",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "YRL",
+        "sindex": 7
+
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/5.jpg",
+        "price" : "294",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "DXL",
+        "sindex": 1
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/6.jpg",
+        "price" : "295",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "PXL",
+        "sindex": 9
+
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/7.jpg",
+        "price" : "296",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "MDL",
+        "sindex": 6
+
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/8.jpg",
+        "price" : "297",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "HGW",
+        "sindex": 1
+
+    },
+    {
+
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/9.jpg",
+        "price" : "298",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "ZRL",
+        "sindex": 3
+
+    },
+    {
+        "img" : "http://www.ilqiqi.top/images/mYc/jx/10.jpg",
+        "price" : "299",
+        "title" : "亿成优生鲜限时秒杀",
+        "id": "NRL",
+        "sindex": 0
+
+    }
+]
+
+
+
 
 
 exports.bannerNav = (req, res, next) => {
