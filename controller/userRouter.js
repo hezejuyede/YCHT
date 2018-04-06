@@ -123,56 +123,6 @@ exports.shoppingCart = (req, res, next) => {
 
     }
 };
-
-exports.setFollowGoods = (req, res, next) => {
-    if (req.session.login !== "1") {
-
-        res.json("-2");
-    }
-    else {
-        let username = req.session.username;
-
-        const form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields) {
-            let FollowGoods = fields.FollowGoods;
-            mongodb.find("userinfos", {"username": username}, ((err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-
-                    let collection = result[0].collection;
-                    let FollowGoodsTitle = FollowGoods.title;
-                    for (let i = 0; i < collection.length; i++) {
-                        if (collection[i].title === FollowGoodsTitle) {
-                            collection[i].num++
-                        }
-                        else {
-                            collection.push(FollowGoods);
-                        }
-                    }
-                    mongodb.updateMany("userinfos",
-                        {"username": username},
-                        {$set: {"collection": collection}},
-                        ((err, result) => {
-                            if (err) {
-                                res.json("-1")
-                            }
-                            else {
-                                res.json("1")
-                            }
-                        }))
-                }
-            }))
-        })
-
-    }
-};
-
-
-
-
-
 exports.MobileUserAddProduct = (req, res, next) => {
     if (req.session.login != "1") {
 
@@ -198,6 +148,245 @@ exports.MobileUserAddProduct = (req, res, next) => {
         })
     }
 };
+
+
+
+exports.setFollowGoods = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        let username = req.session.username;
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let FollowGoods = fields.FollowGoods;
+            mongodb.find("userinfos", {"username": username}, ((err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+
+                    let collection = result[0].collection;
+                    let FollowGoodsTitle = FollowGoods.title;
+                    if (collection.length === 0) {
+                        collection.push(FollowGoods);
+                        mongodb.updateMany("userinfos",
+                            {"username": username},
+                            {$set: {"collection": collection}},
+                            ((err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json("1")
+                                }
+                            }))
+                    }
+                    else if (collection.length > 0) {
+
+                        for (let i = 0; i < collection.length; i++) {
+                            if (collection[i].title === FollowGoodsTitle) {
+                                collection[i].num++;
+
+                            }
+                            else {
+                                collection.push(FollowGoods);
+                            }
+                        }
+                        let col1 = [];
+                        let col2 = [];
+
+                        for (let i = 0; i < collection.length; i++) {
+                            if (collection[i].title !== FollowGoodsTitle) {
+                                col1.push(collection[i])
+                            }
+                            else if (collection[i].title === FollowGoodsTitle) {
+                                col2.push(collection[i])
+                            }
+                        }
+                        let one = col2[0];
+                        col1.push(one);
+
+                        mongodb.updateMany("userinfos",
+                            {"username": username},
+                            {$set: {"collection": col1}},
+                            ((err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json("1")
+                                }
+                            }))
+                    }
+                }
+            }))
+        })
+
+    }
+};
+exports.getFollowGoods = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        let username = req.session.username;
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            mongodb.find("userinfos", {"username": username}, ((err, result) => {
+                if (err) {
+                    console.log("-1");
+                }
+                else {
+                    let FollowGoods = result[0].collection;
+                    res.json(FollowGoods)
+                }
+            }))
+        })
+
+    }
+};
+exports.deleteFollowGoods = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        let username = req.session.username;
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let index = fields.index;
+            mongodb.find("userinfos", {"username": username}, ((err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+
+                    let collection = result[0].collection;
+                    collection.splice(index,1);
+                    mongodb.updateMany("userinfos",
+                        {"username": username},
+                        {$set: {"collection": collection}},
+                        ((err, result) => {
+                            if (err) {
+                                res.json("-1")
+                            }
+                            else {
+                                res.json("1")
+                            }
+                        }))
+
+                }
+            }))
+        })
+
+    }
+};
+
+exports.DetailsDeleteFollowGoods = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        let username = req.session.username;
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let index = fields.index;
+            mongodb.find("userinfos", {"username": username}, ((err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+
+                    let collection = result[0].collection;
+                    collection.pop();
+                    mongodb.updateMany("userinfos",
+                        {"username": username},
+                        {$set: {"collection": collection}},
+                        ((err, result) => {
+                            if (err) {
+                                res.json("-1")
+                            }
+                            else {
+                                res.json("1")
+                            }
+                        }))
+
+                }
+            }))
+        })
+
+    }
+};
+
+exports.setUserOrderState = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        let username = req.session.username;
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let orderInfo = fields.orderInfo;
+            mongodb.insertOne("userOrder",
+                {
+                    "orderNumber": orderInfo.orderNumber,
+                    "orderTime": orderInfo.time,
+                    "name": orderInfo.name,
+                    "phoneNumber": orderInfo.phoneNumber,
+                    "address": orderInfo.address,
+                    "orderState": orderInfo.orderState,
+                    "orderStyle": orderInfo.orderStyle,
+                    "orderAmount": orderInfo.orderAmount,
+                    "orderDetail": orderInfo.orderDetail
+                }, ((err, result) => {
+                    if (err) {
+                        res.json("-1")
+                    }
+                    else {
+                        res.json("1")
+                    }
+                }))
+        })
+
+    }
+};
+
+exports.getUserOrderState = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        let username = req.session.username;
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let num = fields.num;
+            mongodb.find("userOrder", {"orderNumber": num}, ((err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+                }
+
+            }))
+
+        })
+
+    }
+};
+
 
 exports.getUserAddressList = (req, res, next) => {
     if (req.session.login != "1") {
@@ -312,7 +501,6 @@ exports.deleteUserAddressList = (req, res, next) => {
     }
 };
 
-
 exports.updateUserAddressList = (req, res, next) => {
     if (req.session.login != "1") {
 
@@ -350,7 +538,6 @@ exports.updateUserAddressList = (req, res, next) => {
         })
     }
 };
-
 
 exports.mrUserAddressList = (req, res, next) => {
     if (req.session.login != "1") {
@@ -390,6 +577,8 @@ exports.mrUserAddressList = (req, res, next) => {
         })
     }
 };
+
+
 
 exports.MobileUserPayment = (req, res, next) => {
     if (req.session.login != "1") {

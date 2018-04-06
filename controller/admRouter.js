@@ -89,7 +89,6 @@ const userOrder = [
         orderTime: "2018-1-21 16:08:08"
     }
 ];
-
 const OrderDetail = [
     {
 
@@ -328,7 +327,6 @@ const OrderDetail = [
     }
 
 ];
-
 const userList = [
     {
         id: '001',
@@ -401,7 +399,6 @@ const userList = [
         registerTime: '2018-01:10:10，10:10:10'
     }
     ];
-
 const productList =[
     {
         img: 'http://www.ilqiqi.top/images/mYc/goods/crad/1.jpg',
@@ -9635,11 +9632,11 @@ exports.admRegester = (req, res, next) => {
         password1 = md5(md5(password1).substr(4, 7) + md5(password1));
         mongodb.find("admInfos", {"username": fields.username1}, (err, result) => {
             if (err) {
-                res.send("-2");
+                res.json("-2");
                 return;
             }
             if (result.length != 0) {
-                res.send("2");
+                res.json("2");
                 return;
             }
             else {
@@ -9651,13 +9648,11 @@ exports.admRegester = (req, res, next) => {
                     "userId":"优生鲜"
                 }, function (err, rusult) {
                     if (err) {
-                        res.send("-1");
-                        console.log('Cookies: ', req.cookies);
-                        return;
+                        res.json("-1");
+
                     }
                     else {
-                        res.send("1");
-                        return;
+                        res.json("1");
                     }
                 })
             }
@@ -9676,7 +9671,7 @@ exports.admLogin = (req, res, next) => {
         password = md5((md5(password).substr(4, 7) + md5(password)));
         mongodb.find("admInfos", {"username": fields.username}, (err, rusult) => {
             if (rusult.length == 0) {
-                res.send("2");
+                res.json("2");
                 return
             }
             var mongodbpassword = rusult[0].password;
@@ -9686,17 +9681,16 @@ exports.admLogin = (req, res, next) => {
                 req.session.useravatar = rusult[0].avatar;
                 req.session.phoneNumber = rusult[0].phone;
                 req.session.userId = rusult[0].userId;
-                res.send({
+                res.json({
                     login: req.session.login,
                     username: req.session.username,
                     useravatar: req.session.useravatar,
                     phoneNumber: req.session.phoneNumber,
                     userID: req.session.userId
                 });
-                return;
             }
             else {
-                res.send("-1")
+                res.json("-1")
             }
         })
     })
@@ -9704,12 +9698,12 @@ exports.admLogin = (req, res, next) => {
 
 exports.userOrder = (req, res, next) => {
     if (req.session.login != "1") {
-        res.send("只有登录才有资格查看")
+        res.json("只有登录才有资格查看")
 
     } else {
         mongodb.find("userOrder", {}, (err, result) => {
             if (err) {
-                res.send(err)
+                res.json(err)
             }
             else {
 
@@ -10317,6 +10311,2518 @@ exports.admChangePhoneNumber = (req, res, next) => {
         })
     }
 };
+
+
+
+
+//移动模块
+exports.admGetBZRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-weekSell', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddBZRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-weekSell',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-weekSell',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateBZRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-weekSell',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteBZRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-weekSell',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+exports.admGetSYLB = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('banner', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYLB = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('banner',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('banner',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYLB = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('banner',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSYLB = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('banner',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+exports.admGetSYTT = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('headerLine', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYTT = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('headerLine',{'id': fields.id},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('headerLine',
+                            {
+                                'text': fields.img,
+                                'id':fields.id
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYTT = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+
+            mongodb.updateMany('headerLine',
+                {'id': fields.id},
+                {
+                    $set: {
+                        'text': fields.img,
+                        'id': fields.id
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSYTT = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('headerLine',
+                {'id': fields.id},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+exports.admGetSYFJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('nearby', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYFJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('nearby',{'id': fields.id},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('nearby',
+                            {
+                                'img': fields.img,
+                                'id':fields.id
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYFJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+
+            mongodb.updateMany('nearby',
+                {'id': fields.id},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'id': fields.id
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSYFJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('nearby',
+                {'id': fields.id},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+
+
+exports.admGetSYTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('recommend', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('recommend',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('recommend',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('recommend',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSYTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('recommend',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+exports.admGetSYMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('jx', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYMS1 = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('jx', {'time':'10'}, (err, result) => {
+                if (err) {
+                    res.json('-1')
+                }
+                else {
+                    let list = result[0].list1;
+                    let a = {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    };
+                    list.push(a);
+                    mongodb.updateMany('jx',
+                        {'time':'10'},
+                        {
+                            $set: {
+                                'list1':list
+                            }
+                        },
+                        (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+
+                                res.json('1')
+                            }
+                        })
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admAddSYMS2 = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('jx', {'time':'15'}, (err, result) => {
+                if (err) {
+                    res.json('-1')
+                }
+                else {
+                    let list = result[0].list2;
+                    let a = {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    };
+                    list.push(a);
+                    mongodb.updateMany('jx',
+                        {'time':'15'},
+                        {
+                            $set: {
+                                'list2':list
+                            }
+                        },
+                        (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+
+                                res.json('1')
+                            }
+                        })
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admAddSYMS3 = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('jx', {'time':'20'}, (err, result) => {
+                if (err) {
+                    res.json('-1')
+                }
+                else {
+                    let list = result[0].list3;
+                    let a = {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    };
+                    list.push(a);
+                    mongodb.updateMany('jx',
+                        {'time':'20'},
+                        {
+                            $set: {
+                                'list3':list
+                            }
+                        },
+                        (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+
+                                res.json('1')
+                            }
+                        })
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.dindex;
+            mongodb.find('jx', {}, (err, result) => {
+                if (err) {
+                    res.json('-1')
+                }
+                else {
+                    let length1 = result[0].list1.length;
+                    let length2 = result[1].list2.length;
+                    let length3 = result[2].list3.length;
+
+                    let length4 = length1+length2;
+                    let length5 = length1+length2+length3;
+                    if (index <= length1) {
+                        mongodb.find('jx', {'time': '10'}, (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+                                let list = result[0].list1;
+
+                                list.splice(index, 1);
+                                let a = {
+                                    'img': fields.img,
+                                    'title': fields.title,
+                                    'price': fields.price,
+                                    'id': fields.id,
+                                    'sindex': fields.sindex
+                                };
+                                list.push(a);
+
+                                mongodb.updateMany('jx',
+                                    {'time': '10'},
+                                    {
+                                        $set: {
+                                            'list1': list
+                                        }
+                                    },
+                                    (err, result) => {
+                                        if (err) {
+                                            res.json('-1')
+                                        }
+                                        else {
+
+                                            res.json('1')
+                                        }
+                                    })
+
+                            }
+                        })
+                    }
+                    else if (index >length1 && index <= length4) {
+                        mongodb.find('jx', {'time': '15'}, (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+                                let list = result[0].list2;
+                                list.splice(index - length1, 1);
+                                let a = {
+                                    'img': fields.img,
+                                    'title': fields.title,
+                                    'price': fields.price,
+                                    'id': fields.id,
+                                    'sindex': fields.sindex
+                                };
+                                list.push(a);
+                                mongodb.updateMany('jx',
+                                    {'time': '15'},
+                                    {
+                                        $set: {
+                                            'list2': list
+                                        }
+                                    },
+                                    (err, result) => {
+                                        if (err) {
+                                            res.json('-1')
+                                        }
+                                        else {
+
+                                            res.json('1')
+                                        }
+                                    })
+
+                            }
+                        })
+                    }
+                    else if (index >length4 && index < length5) {
+                        mongodb.find('jx', {'time': '20'}, (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+                                let list = result[0].list3;
+                                list.splice(index - length4, 1);
+                                let a = {
+                                    'img': fields.img,
+                                    'title': fields.title,
+                                    'price': fields.price,
+                                    'id': fields.id,
+                                    'sindex': fields.sindex
+                                };
+                                list.push(a);
+                                mongodb.updateMany('jx',
+                                    {'time': '20'},
+                                    {
+                                        $set: {
+                                            'list3': list
+                                        }
+                                    },
+                                    (err, result) => {
+                                        if (err) {
+                                            res.json('-1')
+                                        }
+                                        else {
+
+                                            res.json('1')
+                                        }
+                                    })
+
+                            }
+                        })
+                    }
+                }
+            })
+
+        })
+    }
+};
+
+
+exports.admDeleteSYMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.find('jx', {}, (err, result) => {
+                if (err) {
+                    res.json('-1')
+                }
+                else {
+                    let length1 = result[0].list1.length;
+                    let length2 = result[1].list2.length;
+                    let length3 = result[2].list3.length;
+
+                    let length4 = length1+length2;
+                    let length5 = length1+length2+length3;
+                    if (index <= length1) {
+                        mongodb.find('jx', {'time': '10'}, (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+                                let list = result[0].list1;
+
+                                list.splice(index, 1);
+                                mongodb.updateMany('jx',
+                                    {'time': '10'},
+                                    {
+                                        $set: {
+                                            'list1': list
+                                        }
+                                    },
+                                    (err, result) => {
+                                        if (err) {
+                                            res.json('-1')
+                                        }
+                                        else {
+
+                                            res.json('1')
+                                        }
+                                    })
+
+                            }
+                        })
+                    }
+                    else if (index >length1 && index <= length4) {
+                        mongodb.find('jx', {'time': '15'}, (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+                                let list = result[0].list2;
+                                list.splice(index - length1, 1);
+                                mongodb.updateMany('jx',
+                                    {'time': '15'},
+                                    {
+                                        $set: {
+                                            'list2': list
+                                        }
+                                    },
+                                    (err, result) => {
+                                        if (err) {
+                                            res.json('-1')
+                                        }
+                                        else {
+
+                                            res.json('1')
+                                        }
+                                    })
+
+                            }
+                        })
+                    }
+                    else if (index >length4 && index < length5) {
+                        mongodb.find('jx', {'time': '20'}, (err, result) => {
+                            if (err) {
+                                res.json('-1')
+                            }
+                            else {
+                                let list = result[0].list3;
+                                list.splice(index - length4, 1);
+                                mongodb.updateMany('jx',
+                                    {'time': '20'},
+                                    {
+                                        $set: {
+                                            'list3': list
+                                        }
+                                    },
+                                    (err, result) => {
+                                        if (err) {
+                                            res.json('-1')
+                                        }
+                                        else {
+
+                                            res.json('1')
+                                        }
+                                    })
+
+                            }
+                        })
+                    }
+                }
+            })
+
+        })
+    }
+};
+
+
+
+
+
+exports.admGetJXHU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('Tuijian', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddJXHU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('Tuijian',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('Tuijian',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateJXHU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('Tuijian',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteJXHU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('Tuijian',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+exports.admGetXPCJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('ChuJian', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddXPCJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('ChuJian',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('ChuJian',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateXPCJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('ChuJian',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteXPCJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('ChuJian',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+exports.admGetSYRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('hotSell', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('hotSell',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('hotSell',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('hotSell',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSYRM = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('hotSell',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+exports.admGetXPTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-newRec', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddXPTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-newRec',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-newRec',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateXPTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-newRec',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteXPTJ = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-newRec',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+exports.admGetYCJX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-ycjx', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddYCJX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-ycjx',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-ycjx',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateYCJX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-ycjx',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteYCJX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-ycjx',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+exports.admGetDZSX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-Discount', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddDZSX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-Discount',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-Discount',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateDZSX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-Discount',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteDZSX = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-Discount',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+
+
+
+exports.admGetXSMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-XsMs', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddXSMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-XsMs',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-XsMs',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateXSMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-XsMs',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteXSMS = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-XsMs',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+exports.admGetSYST = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-syst', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSYST = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-syst',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-syst',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSYST = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-syst',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSYST = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-syst',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+exports.admGetTSCY = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-tscy', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddTSCY = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-tscy',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-tscy',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateTSCY = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-tscy',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteTSCY = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-tscy',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+
+exports.admGetJXLH = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-TjLh', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddJXLH = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('C-TjLh',{'img': fields.img},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('C-TjLh',
+                            {
+                                'img': fields.img,
+                                'title': fields.title,
+                                'price': fields.price,
+                                'id': fields.id,
+                                'sindex': fields.sindex
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateJXLH = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('C-TjLh',
+                {'img': fields.img},
+                {
+                    $set: {
+                        'img': fields.img,
+                        'title': fields.title,
+                        'price': fields.price,
+                        'id': fields.id,
+                        'sindex': fields.sindex
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteJXLH = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('C-TjLh',
+                {'img': fields.img},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+exports.admGetSPSU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('search', {}, (err, result) => {
+                if (err) {
+                    res.json("-1")
+                }
+                else {
+                    res.json(result)
+
+                }
+            })
+        })
+    }
+};
+
+exports.admAddSPSU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.find('search',{'id': fields.id},(err, result) => {
+                if (err) {
+                    res.json("-2")
+                }
+                else {
+                    if (result.length !== 0) {
+                        res.json("2");
+                    }
+                    else {
+                        mongodb.insertOne('search',
+                            {
+                                'goods': fields.img,
+                                'id':fields.id
+                            },
+                            (err, result) => {
+                                if (err) {
+                                    res.json("-1")
+                                }
+                                else {
+                                    res.json('1')
+                                }
+                            }
+                        )
+                    }
+
+                }
+            })
+
+        })
+    }
+};
+
+exports.admUpdateSPSU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            let index = fields.index;
+            mongodb.updateMany('search',
+                {'id': fields.id},
+                {
+                    $set: {
+                        'goods': fields.img,
+                        'id': fields.id
+                    }
+                },
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+
+                        res.json('1')
+                    }
+                })
+        })
+    }
+};
+
+exports.admDeleteSPSU = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.json("-2");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, (err, fields) => {
+            mongodb.deleteMany('search',
+                {'id': fields.id},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json('1')
+
+                    }
+
+                })
+        })
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

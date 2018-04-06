@@ -7,6 +7,8 @@ const gm = require('gm');                          //引入GM
 const ObjectId = require('mongodb').ObjectID;     //引入OjeckID模块
 
 
+
+
 const bannerNav =[
     [
         {
@@ -2787,10 +2789,6 @@ const mUserInfos = [{
     ye: [{ye: 199}]
 }];
 
-const MgoodsDetails = [{
-
-
-}];
 
 const rightLists = [
     {
@@ -3259,7 +3257,7 @@ const rightLists = [
         },
         {
             img: "http://www.ilqiqi.top/images/mYc/goods/fishs/2.jpg",
-            title: "金枪鱼刺身",
+            title: "刺身",
             id: "XY002",
             price: "292",
             number: "192"
@@ -3927,27 +3925,8 @@ exports.hot = (req, res, next) => {
     })
 };
 
-exports.leftLists = (req, res, next)=> {
-    mongodb.find("leftLists",{},(err,result)=>{
-        if(err){res.send(err)}
-        else {
-            res.json(result)
-        }
-    })
-};
 
-exports.rightLists = (req, res, next)=> {
-    /*mongodb.find("rightLists",{},(err,result)=>{
-        if(err){
-            res.json(err)
-        }
-        else {
-            res.json(result)
-        }
 
-    })*/
-    res.json(rightLists)
-};
 
 exports.MuserInfos = (req, res, next)=> {
     res.json(mUserInfos);
