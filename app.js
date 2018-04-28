@@ -1,15 +1,18 @@
 const express = require("express");                         //引入EXPRESS框架
-const indexrourer  = require("./controller/indexRouter");   //引入主页路由
-const userrouter   = require('./controller/userRouter');    //引入客户路由
-const admRouter    = require('./controller/admRouter');     //引入管理端路由
+const indexrourer = require("./controller/indexRouter");   //引入主页路由
+const userrouter = require('./controller/userRouter');    //引入客户路由
+const JQeryIndex = require('./controller/JQeryIndex');          //引入JQ路由
+const admRouter = require('./controller/admRouter');       //引入管理端路由
 const mobileRouter = require('./controller/mobileRouter');  //引入移动端路由
 const PcRouter = require('./controller/PcRouter');          //引入Pc端路由
 const session = require("express-session");                //引入session模块
+const page    = require('./controller/A-page');        //引入页面 路由
+const mongodb = require("./models/mongodb");        //引入mongodb的数据库
 
 
 const app = express();                                   //实例化ESPRESS
 
- 
+
 app.use(session({                                    //使用session中间件
     secret: 'keyboard cat',
     resave: false,
@@ -22,21 +25,84 @@ app.set("view engine", "ejs");                         //使用EJS模板
 app.use(express.static("./public"));                   //静态PUBLIC
 app.use("/avatar", express.static("./avatar"));        //静态avatar
 
+//加载的页面
+
 //后台系统网站
-app.get('/HTSystem', (req, res, next) => {
-    res.render("H");
-});
+app.get('/HTSystem',page.HTSystem);
 //移动端网站
-app.get('/MobileYSX', (req, res, next) => {
-    res.render("M")
-});
-//PC端网站
-app.get('/PcYSX', (req, res, next) => {
-    res.render("P")
-});
+app.get('/MobileYSX',page.MobileYSX);
+//PC端水汪汪网站
+app.get('/PcYSX', page.PcYSX);
 
 
 
+// jQuery版本路由
+// 页面
+app.get('/ycysx/goodsdetails/:id:sindex',page.EveryGoodsDetails);  //引入商品详情页面
+app.get('/buyPage',page.buyPage);                              //引入购买页面
+app.get('/payPage',page.payPage);                              //引入付款页面
+
+
+//接口
+app.get('/JQLeftNav', JQeryIndex.JQLeftNav);
+app.get('/JQLeftNavList', JQeryIndex.JQLeftNavList);
+app.get('/JQBannerList', JQeryIndex.JQBannerList);
+app.get('/JQProductList', JQeryIndex.JQProductList);
+app.get('/JQSecondKill', JQeryIndex.JQSecondKill);
+app.get('/JQUserSay', JQeryIndex.JQUserSay);
+app.get('/EveryGoodsDetails', JQeryIndex.EveryGoodsDetails);
+
+app.post('/PCsetUserAddressList', userrouter.PCsetUserAddressList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//商城路由
+// PC端移动端微信端公共部分
+
+app.post("/doregister",indexrourer.userregister);                    // 公共注册
+app.post("/dologin",indexrourer.userlogin);                          //公共登录
+
+
+
+
+
+
+
+//PC端亿成优生鲜
+// 客户个人信息处理路由
+app.get("/ycysx",indexrourer.ycysx);                                                 //引入优生鲜路由
+app.get("/loginregister",indexrourer.ploginregister);                               //引入注册登录页面
+app.get("/goodsdetails",indexrourer.goodsdetails);                                  //引入商品详情页面
+
+app.get("/ycysx/shoppingcart",indexrourer.shoppingcart);                           //引入购物车页面
+app.get("/ycysx/userinfos",indexrourer.userinfos);                                  //引入客户信息页面
+app.post("/changeuserinfos",indexrourer.changeuserinfos);                           //客户进行修改信息
+
+
+//修改头像处理
+app.post("/upavatar",indexrourer.upavatar);                                          //客户进行图片上传
+app.get("/modifyAvatar",indexrourer.modifyAvatar);                                  //客户剪切的路由
+app.get("/docut",indexrourer.docut);                                                //客户进行剪切头像
+
+
+
+
+//主页路由
+
+app.get('/', page.home);
+app.get('/indexBanner',indexrourer.indexBanner);
 
 
 
@@ -47,6 +113,7 @@ app.get('/PcYSX', (req, res, next) => {
 
 
 //公共部分（客户端）
+
 app.post("/userRegister", userrouter.userRegister);  //用户注册
 app.post("/api/userRegister", userrouter.userRegister);  //用户注册
 
@@ -55,9 +122,10 @@ app.post("/api/userlogin", userrouter.userlogin);        //用户登录
 
 app.post('/shoppingCart', userrouter.shoppingCart);  //获得购物车
 app.post('/api/shoppingCart', userrouter.shoppingCart);  //获得购物车
+app.get('/JQeryShoppingCart', JQeryIndex.JQeryShoppingCart);  //JQery获得购物车
 app.post('/MobileUserAddProduct',userrouter.MobileUserAddProduct); //添加到购物车
 app.post('/api/MobileUserAddProduct',userrouter.MobileUserAddProduct); //添加到购物车
-
+app.post('/JQUserAddProduct',userrouter.JQUserAddProduct); //JQ版添加到购物车
 
 app.post('/setFollowGoods', userrouter.setFollowGoods); //添加收藏
 app.post('/api/setFollowGoods',userrouter.setFollowGoods); //添加到收藏
@@ -114,28 +182,34 @@ app.post('/api/UserChangeAge', userrouter.UserChangeAge);            //修改年
 app.post('/api/UserChangeEmail', userrouter.UserChangeEmail);        //修改邮箱
 app.post('/api/UserChangePassWord', userrouter.UserChangePassWord);  //修改密码
 
-
-
-
+app.post('/UserChatList',userrouter.UserChatList) ;                  //保存聊天记录
+app.post('/api/UserChatList',userrouter.UserChatList);               //保存聊天记录
+app.post('/getUserChatList',userrouter.getUserChatList) ;          //获取聊天记录
+app.post('/api/getUserChatList',userrouter.getUserChatList);       //获取保存聊天记录
+app.post('/getUserWDChatList',userrouter.getUserWDChatList) ;      //获取聊天记录
+app.post('/api/getWDUserChatList',userrouter.getUserWDChatList) ;//获取保存聊天记录
 
 
 
 
 
 //PC端请求的数据
-app.get("/api/banner",indexrourer.banner);
-app.get('/api/bannerNav',indexrourer.bannerNav);
-app.get('/api/jx', indexrourer.jx);
-app.get('/api/headerLine', indexrourer.headerLine);
-app.get('/api/tsBuy', indexrourer.tsbuy);
-app.get('/api/pcRecommend', indexrourer.pcRecommend);
-app.get('/api/pcGoodsList', indexrourer.pcGoodsList);
-app.get('/api/userSay', indexrourer.userSay);
+app.get("/api/banner",PcRouter.banner);
+app.get('/api/bannerNav',PcRouter.bannerNav);
+app.get('/api/jx', PcRouter.jx);
+app.get('/api/headerLine', PcRouter.headerLine);
+app.get('/api/tsBuy', PcRouter.tsbuy);
+app.get('/api/pcRecommend', PcRouter.pcRecommend);
+app.get('/api/pcGoodsList', PcRouter.pcGoodsList);
+app.get('/api/userSay', PcRouter.userSay);
 app.post('/api/shoppingCart',userrouter.shoppingCart);
-app.get('/api/myAddress',indexrourer.myAddress);
-app.get('/api/userInfo',indexrourer.userInfo);
-app.get('/api/productDetails',indexrourer.productDetails);
+
+app.get('/api/myAddress',PcRouter.myAddress);
+app.get('/api/userInfo',PcRouter.userInfo);
+app.get('/api/productDetails',PcRouter.productDetails);
+
 app.post("/api/userRegister",userrouter.userRegister);
+
 app.post("/api/userlogin",userrouter.userlogin);
 
 
@@ -145,36 +219,38 @@ app.post("/api/userlogin",userrouter.userlogin);
 
 
 //移动端请求的数据
-app.get("/banner",indexrourer.banner);
-app.get('/headerLine', indexrourer.headerLine);
-app.get('/jx', indexrourer.jx);
+app.get("/banner",mobileRouter.banner);
+app.get('/headerLine', mobileRouter.headerLine);
+app.get('/jx', mobileRouter.jx);
+app.get("/api/banner",mobileRouter.banner);
+app.get('/api/headerLine', mobileRouter.headerLine);
+app.get('/api/jx', mobileRouter.jx);
+
+
+
+app.get('/recommend', mobileRouter.recommend);
+app.get('/api/recommend', mobileRouter.recommend);
 
 
 
 
-app.get('/recommend', indexrourer.recommend);
-app.get('/api/recommend', indexrourer.recommend);
+app.get('/tuijian', mobileRouter.tuijian);
+app.get('/api/tuijian', mobileRouter.tuijian);
 
+app.get('/hotSell', mobileRouter.hotSell);
+app.get('/api/hotSell', mobileRouter.hotSell);
 
+app.get('/chujian', mobileRouter.chujian);
+app.get('/api/chujian', mobileRouter.chujian);
 
+app.get('/goodsList', mobileRouter.goodsList);
+app.get('/api/goodsList', mobileRouter.goodsList);
 
-app.get('/tuijian', indexrourer.tuijian);
-app.get('/api/tuijian', indexrourer.tuijian);
+app.get("/search",mobileRouter.search);
+app.get("/api/search",mobileRouter.search);
 
-app.get('/hotSell', indexrourer.hotSell);
-app.get('/api/hotSell', indexrourer.hotSell);
-
-app.get('/chujian', indexrourer.chujian);
-app.get('/api/chujian', indexrourer.chujian);
-
-app.get('/goodsList', indexrourer.goodsList);
-app.get('/api/goodsList', indexrourer.goodsList);
-
-app.get("/search",indexrourer.search);
-app.get("/api/search",indexrourer.search);
-
-app.get('/hot', indexrourer.hot);
-app.get('/api/hot', indexrourer.hot);
+app.get('/hot', mobileRouter.hot);
+app.get('/api/hot', mobileRouter.hot);
 
 
 
@@ -190,14 +266,14 @@ app.get('/api/MRightLists', mobileRouter.MRightLists);
 
 
 
-app.get('/MobileGoodsDetails', indexrourer.MobileGoodsDetails);
-app.get('/api/MobileGoodsDetails', indexrourer.MobileGoodsDetails);
+app.get('/MobileGoodsDetails', mobileRouter.MobileGoodsDetails);
+app.get('/api/MobileGoodsDetails', mobileRouter.MobileGoodsDetails);
 
-app.get('/MUserInfos', indexrourer.MuserInfos);
-app.get('/api/MUserInfos', indexrourer.MuserInfos);
+app.get('/MUserInfos', mobileRouter.MuserInfos);
+app.get('/api/MUserInfos', mobileRouter.MuserInfos);
 
-app.post('/searchGoods', indexrourer.searchGoods);
-app.post('/api/searchGoods', indexrourer.searchGoods);
+app.post('/searchGoods', mobileRouter.searchGoods);
+app.post('/api/searchGoods', mobileRouter.searchGoods);
 
 
 
@@ -258,7 +334,6 @@ app.get('/api/userOrderState', mobileRouter.userOrderState);
 
 app.get('/mobileNearby', mobileRouter.mobileNearby);
 app.get('/api/mobileNearby', mobileRouter.mobileNearby);
-
 
 
 
@@ -423,13 +498,83 @@ app.post('/admAddSYFJ',admRouter.admAddSYFJ);
 app.post('/admUpdateSYFJ',admRouter.admUpdateSYFJ);
 app.post('/admDeleteSYFJ',admRouter.admDeleteSYFJ);
 
+app.post('/AdmGetUserInfoList',admRouter.AdmGetUserInfoList)
+app.post('/AdmGetLtList',admRouter.AdmGetLtList)
+app.post('/admDeleteLT',admRouter.admDeleteLT)
+
+
 
 
 
 
 app.use((req, res)=> {
-    res.redirect('/HTSystem');
+    res.redirect('/HTSystem');                       //监听404
 });
 
-app.listen(3000);                                 //监听3000端口
+const server = app.listen(3000);                    //监听3000端口
+const io = require('socket.io').listen(server);   //引入socket.io模块
+
+let arrAllSocket = [];
+io.on("connection", (socket) => {
+    socket.on("CustomerService", (msg) => {
+        let user = msg.username;
+        arrAllSocket[user] = socket
+    })
+
+
+    socket.on("privateMessage", (from, to, msg) => {
+
+        if (arrAllSocket[to]) {
+            arrAllSocket[to].emit("privateMsg", from,to,msg);
+            arrAllSocket[from].emit("privateMsg", from,to,msg);
+        }
+        else {
+            arrAllSocket[from].emit("privateMsg",from,to,msg);
+            let username = to;
+            let onMessage = [];
+            let t = msg.time;
+            let time = t.slice(5);
+            let b = {
+                'direction':"right",
+                'time':time,
+                'rightContent': msg.message,
+                'rightAvatar': msg.avatar,
+                'state':"2"
+            };
+
+            onMessage.push(b);
+
+            mongodb.find("userinfos", {"username": username}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    let chatList = result[0].chatList;
+                    let c = chatList.concat(onMessage);
+                    mongodb.updateMany('userinfos', {"username": username},
+                        {
+                            $set: {"chatList": c}
+                        },
+                        (err, result) => {
+                            if (err) {
+                                console.log(err)
+                            }
+                            else {
+
+                                console.log("1")
+
+                            }
+                        }
+                    )
+
+                }
+            })
+        }
+
+    })
+
+
+
+});
+
 console.log("SERVER START");                     //控制台打印服务器成功启动信息
