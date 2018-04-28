@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta name="description"
+          content="亿成优生鲜(www.yanjina.top)亿成优生鲜鲁西南唯一官方网上生鲜商城，中国领先的专业生鲜网购平台.7大系列产品，鸡、鸭分割系列、猪系列、水产品、调理品、火锅产品、面点等7大系列1000种商品；更低价格，更快送达，为您提供便捷、诚信的服务.">
+    <meta name="Keywords" content="亿成,亿成优生鲜,生鲜,生鲜官方旗舰店,生鲜网上商城,鸡,鸭分割系列,猪系列,水产品,调理品,火锅产品,面点">
+    <meta property="qc:admins" content="2500556177677556375636">
+    <meta name="applicable-device" content="pc">
+    <meta name="data-code" content="sy">
+    <meta http-equiv="mobile-agent" content="format=xhtml; url=//m.yanjina.top">
+    <meta http-equiv="mobile-agent" content="format=html5; url=//m.yanjina.top">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="//">
+    <title>亿成优生鲜-网购商城，正品低价、品质保障、快速送达、安心服务！</title>
+    <link rel="stylesheet" type="text/css" href="../ycysx/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../ycysx/css/icon/iconfont.css">
+    <style>
+        .buyPageTemplate{
+            width: 600px;
+            margin: 10px auto ;
+            height: 100px;
+            border: 1px solid#f0f0f0;
+        }
+        .buyPageTemplate-left{
+            float: left;
+            height: 100px;
+            width: 40%;
+            text-align: center;
+            line-height: 40px;
+        }
+        .buyPageTemplate-left img{
+            width: 100px;
+            height: 100px;
+        }
+        .buyPageTemplate-right{
+            float: left;
+            height: 100px;
+            width: 60%;
+            text-align: center;
+            line-height: 40px;
+        }
+        .buyPageTemplate-right p{
+            float: left;
+            line-height: 100px;
+            margin-left: 50px;
+            font-size: 20px;
+        }
+
+
+        .ZFBPay{
+            width:  400px;
+            height: 60px;
+            margin: 10px auto;
+            line-height: 60px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .WXPay{
+            width: 400px;
+            height: 60px;
+            margin: 10px auto;
+            line-height: 60px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .ZFBPay-left,.WXPay-left{
+            float: left;
+            width: 30%;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+        .ZFBPay-center,.WXPay-center{
+            float: left;
+            width: 40%;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+        .ZFBPay-right,.WXPay-right{
+            float: left;
+            width: 30%;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .ZFBPay .icon-zhifubao1{
+            font-size: 26px;
+            color: #00aeef;
+
+        }
+
+        .WXPay .icon-weixin1{
+            font-size: 26px;
+            color: #00b938;
+        }
+
+
+
+        .ZFBPay .icon-xuanze1{
+            font-size: 28px;
+
+
+        }
+
+        .WXPay .icon-xuanze1{
+            font-size: 28px;
+
+        }
+
+
+
+        .QRPay{
+            width: 400px;
+            height: 40px;
+            background-color: #00b938;
+            margin: 10px auto;
+            line-height: 40px;
+            text-align: center;
+            font-size: 18px;
+            color: #FFFFff;
+            border-radius: 5%;
+        }
+        .icon-duihao{
+            font-size: 28px;
+            color: #00B856;
+        }
+
+    </style>
+</head>
+<body>
+<% include ycysxheader.ejs %>
+<main style="background-color: #FFFFff;width: 100%;padding-top: 50px;padding-bottom: 50px">
+    <section style="background-color: #FFFFff;width: 1190px;margin: 0 auto ">
+        <div class="buyPageTemplate">
+            <div class="buyPageTemplate-left"></div>
+            <div class="buyPageTemplate-right"></div>
+        </div>
+    </section >
+    <section style="background-color: #FFFFff;width: 1190px;margin: 0 auto ">
+        <div class="ZFBPay">
+            <div class="ZFBPay-left">
+                <i class="iconfont icon-zhifubao1"></i>
+            </div>
+            <div class="ZFBPay-center">
+                <span>支付宝支付</span>
+            </div>
+            <div class="ZFBPay-right">
+                <i class="iconfont icon-xuanze1" id="changeZFBPay"></i>
+            </div>
+        </div>
+        <div class="WXPay">
+            <div class="WXPay-left">
+                <i class="iconfont icon-weixin1"></i>
+            </div>
+            <div class="WXPay-center">
+                <span>微信支付</span>
+            </div>
+            <div class="WXPay-right">
+                <i class="iconfont icon-xuanze1" id="changeWXPay"></i>
+            </div>
+        </div>
+    </section>
+    <section style="background-color: #FFFFff;width: 1190px;margin: 0 auto ">
+        <div class="QRPay">确认付款</div>
+    </section>
+</main>
+<% include ycysxfooter.ejs %>
+<script type="text/javascript" src="../lib/jquery.min.js"></script>
+<script>
+    function getUrlParam(key){
+        // 获取参数
+        let  url = window.location.search;
+        // 正则筛选地址栏
+        let reg = new RegExp("(^|&)"+ key +"=([^&]*)(&|$)");
+        // 匹配目标参数
+        let result = url.substr(1).match(reg);
+        //返回参数值
+        return result ? decodeURIComponent(result[2]) : null;
+    }
+    let img = getUrlParam("img");
+    let title = getUrlParam("title");
+    let allPrice = getUrlParam("allPrice");
+    $(".buyPageTemplate-left").append("<img src=" + img + ">");
+    $(".buyPageTemplate-right").append("<p class=\"right-title\">商品名：" + title + "</p>");
+    $(".buyPageTemplate-right").append(" <p class=\"right-allPrice\">总价：" + allPrice + "元</p>");
+
+    $("#changeZFBPay").on("click", () => {
+
+        $("#changeWXPay").removeClass("iconfont icon-duihao").addClass("iconfont icon-xuanze1")
+        $("#changeZFBPay").removeClass("iconfont icon-xuanze1").addClass("iconfont icon-duihao")
+    })
+    $("#changeWXPay").on("click", () => {
+
+        $("#changeZFBPay").removeClass("iconfont icon-duihao").addClass("iconfont icon-xuanze1")
+        $("#changeWXPay").removeClass("iconfont icon-xuanze1").addClass("iconfont icon-duihao")
+    })
+
+
+</script>
+</body>
+</html>

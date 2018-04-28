@@ -1,0 +1,635 @@
+/*注册登录页面样式*/
+
+
+
+body{
+    text-align: center;
+}
+
+main section{
+    width: 100%;
+    min-width: 1190px;
+    height: 500px;
+    border-bottom: 3px solid #f0f0f0;
+    margin-top: 10px;
+
+}
+
+
+
+/*登录注册头部开始*/
+
+
+.lrheader{
+    width: 100%;
+    min-width: 1190px;
+    height: 120px;
+}
+
+
+.lrheader-top{
+    height: 80px;
+    background-color: #FFFFff;
+    line-height: 100px;
+
+}
+
+
+
+.lrheader-top-logo{
+    width: 150px;
+    height: 100px;
+    line-height: 100px;
+    background: url("../img/header/logo.png") no-repeat center center;
+    float: left;
+    margin-left: 180px;
+}
+
+.lrheader-top-text{
+    display: block;
+    float: left;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: "SimSun", Arial, sans-serif;
+}
+
+
+.lrheader-bottom{
+    width: 100%;
+    height: 40px;
+    background-color: #FFF8F0;
+    color: #FFA258;
+    text-align: center;
+    line-height: 40px;
+    float: left;
+    margin-top: -19px;
+}
+
+.lrmanin-login-content-top  {
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid #FF0000;
+    line-height: 55px;
+    font-size: 20px;
+
+
+}
+
+/*登录注册头部结束*/
+
+
+
+
+
+
+
+
+/*登录开始*/
+
+.lrmanin-login{
+    width: 100%;
+    background-color: #78C2CF;
+
+
+}
+
+.lrmanin-login-one{
+    position: relative;
+
+}
+.lrmanin-login-content{
+    width: 350px;
+    height: 390px;
+    background-color: #FFFFff;
+    position: absolute;
+    top: 40px;
+    right: 0;
+}
+
+
+
+.lrmanin-login-content-top span:first-child{
+    display: block;
+    width: 50%;
+    float: left;
+    cursor: pointer;
+
+}
+
+
+.lrmanin-login-content-top span:last-child{
+    display: block;
+    width: 50%;
+    float: left;
+    cursor: pointer;
+
+}
+
+
+
+
+.lrmanin-login-content-center{
+    height: 285px;
+    text-align: center;
+
+
+
+}
+
+.spancolor{
+    color: #F10215;
+
+}
+
+
+
+.lrmanin-login-content-bottom{
+    height: 50px;
+    line-height: 50px;
+    background-color: #FCFCFC;
+    border-top: 1px solid red;
+
+
+}
+
+.lrmanin-login-content-bottom-qq
+{
+
+
+    float: left;
+    margin-left: 20px;
+
+
+
+}
+.lrmanin-login-content-bottom-weixin
+{
+    float: left;
+
+
+}
+
+.lrmanin-login-content-bottom-span{
+    display: block;
+    float: left;
+    width: 1px;
+    height: 10px;
+    background-color: #999999;
+    margin: 20px 10px 0 15px ;
+
+}
+
+.lrmanin-login-content-center img:first-child {
+    margin-top: 20px;
+    margin-right: 15px;
+    margin-bottom: 25px;
+
+}
+
+.lrmanin-login-content-center img:last-child {
+    margin-top: 20px;
+    margin-bottom: 25px;
+
+}
+
+
+.open-ewm{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+
+
+}
+
+
+.open-ewm span:first-child{
+    color: #F10215;
+    margin-left: 10px;
+
+
+}
+
+.lrmanin-login-content-center-login div {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #f0f0f0;
+    margin: 10px auto;
+    line-height: 40px;
+
+
+}
+
+.lrmanin-login-content-center-login{
+    display: none;
+
+}
+
+
+
+.lrmanin-login-content-center-login .icon-iconfonticonfontwode1,
+.lrmanin-login-content-center-login .icon-mima
+{
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #F3F3F3;
+    float: left;
+
+}
+
+
+.lrmanin-login-content-center-login div input{
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    padding-left: 20px;
+
+
+}
+
+
+.lrmanin-login-content-center-login a {
+
+    float: right;
+    display: block;
+    margin-right: 20px;
+
+}
+
+
+
+
+.lrmanin-login-content-center-login button{
+    width: 300px;
+    height: 30px;
+    background-color: #E4393C;
+    color: #FFFFff;
+    font-size: 18px;
+    margin-top: 40px;
+
+
+
+}
+
+
+
+
+
+
+.lrmanin-login-content-bottom .icon-right-trangle{
+  color: #F10215;
+
+}
+
+
+.lrmanin-login-content-bottom-register{
+    float: right;
+    margin-right: 20px;
+
+}
+.lrmanin-login-content-bottom-register .icon-right-trangle{
+    display: block;
+    float: right;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #F10215;
+    color: #FFFFff;
+    line-height: 18px;
+    margin-top: 15px;
+    text-align: center;
+    margin-left: 5px;
+
+
+}
+
+
+.lrmanin-login-content-bottom-register span{
+    float: right;
+
+}
+
+.lrmanin-login-content-bottom .icon-qq:before{
+        color: #10A8FF;
+
+}
+
+.lrmanin-login-content-bottom .icon-weixin{
+
+        color: #00CC00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*注册样式*/
+
+.lrmanin-register{
+    width: 100%;
+    background-color: #DEC990;
+    display: none;
+
+
+}
+
+.lrmanin-register-content{
+    position: relative;
+
+}
+
+
+
+
+.lrmanin-register-table{
+    width: 550px;
+    height: 450px;
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 25px;
+    opacity: 0.8;
+
+
+
+}
+
+
+.lrmanin-register-table div {
+    width: 500px;
+    height: 55px;
+    border: 1px solid #999999;
+    margin: 5px auto 0 auto;
+    line-height: 55px;
+
+}
+.lrmanin-register-table div input {
+    float: left;
+    width: 400px;
+    height: 55px;
+    line-height: 55px;
+    font-size:20px;
+    padding-left: 10px;
+    background-color: #f0f0f0;
+}
+.lrmanin-register-table div .icon-iconfontshoudaodehezuoshenqing
+{
+    float: left;
+    display: block;
+    width: 50px;
+    height: 55px;
+    font-size: 270%;
+    line-height: 55px;
+    background-color: #f0f0f0;
+    color: #00B856;
+
+
+
+
+}
+.lrmanin-register-table div .icon-yanzhengma1,
+.lrmanin-register-table div .icon-phone,
+.lrmanin-register-table div .icon-mima1,
+.lrmanin-register-table div .icon-mima1,
+.lrmanin-register-table div .icon-iconfonticonfontwode1{
+    float: left;
+    display: block;
+    width: 50px;
+    height: 55px;
+    font-size: 200%;
+    line-height: 55px;
+    background-color: #f0f0f0;
+    color: #00B856;
+
+}
+
+
+.identifyingcode{
+    width: 200px;
+    height: 55px;
+    background-color: #999999;
+    position: absolute;
+    bottom: 96px;
+    right: 25px;
+    line-height: 55px;
+    font-size: 30px;
+    text-align: center;
+    color: #FFFFff;
+
+}
+
+.lrmanin-lookfor-content{
+    width: 1000px;
+    height: 330px;
+    margin: 0 auto;
+    background-color: #FF3A06;
+
+}
+
+
+
+
+
+
+.lrmanin-register-table button {
+    width: 500px;
+    height: 55px;
+    margin: 5px auto 0 auto;
+    background-color: #F10215;
+    color: #FFFFff;
+    font-size: 20px;
+
+}
+
+
+
+
+
+
+
+/*找回密码样式*/
+
+.lrmanin-lookfor{
+    width: 100%;
+    background-color: #FFC750;
+    display: none;
+
+}
+
+.lookfor-content {
+    position: relative;
+}
+
+.lrmanin-lookfor-text{
+    width: 650px;
+    height: 296px;
+    margin-top: 20px;
+    background-color: #FFF;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+
+
+}
+
+.lrmanin-lookfor-text h2 {
+    font-size: 18px;
+    margin-top: 10px;
+
+}
+
+.lrmanin-lookfor-text-buzhou-heng{
+    width: 160px;
+    height: 5px;
+    background-color: #CCCCCC;
+    border-radius: 10%;
+    margin-top: 20px;
+    float: left;
+   text-align: center;
+
+
+}
+
+
+
+.lrmanin-lookfor-text-buzhou-one{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 25px;
+    color: #FFFFff;
+    font-size: 18px;
+    background-color: #CCCCCC;
+    position: absolute;
+    top: 37px;
+    left: 40px;
+
+}
+
+
+
+
+.lrmanin-lookfor-text-buzhou-two{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 25px;
+    color: #FFFFff;
+    font-size: 18px;
+    background-color: #CCCCCC;
+    position: absolute;
+    top: 37px;
+    left: 200px;
+
+}
+
+.lrmanin-lookfor-text-buzhou-third{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 25px;
+    color: #FFFFff;
+    font-size: 18px;
+    background-color: #CCCCCC;
+    position: absolute;
+    top: 37px;
+    left: 380px;
+
+}
+
+.lrmanin-lookfor-text-buzhou-four{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 25px;
+    color: #FFFFff;
+    font-size: 18px;
+    background-color: #CCCCCC;
+    position: absolute;
+    top: 37px;
+    left: 560px;
+
+}
+
+.daole{
+    background-color: #7ABD54;
+
+}
+
+
+.lrmanin-lookfor-text-teble{
+    margin-top: 70px;
+
+}
+
+.lrmanin-lookfor-text-teble input {
+    width: 150px;
+    height: 35px;
+    margin-top: 20px;
+    border: 2px solid #CCCCCC;
+
+
+}
+
+.lrmanin-lookfor-text-teble button {
+    width: 150px;
+    height: 30px;
+    background-color: #FF3A06;
+    color: #FFFFff;
+    margin-left: 40px;
+
+
+}
+
+
+.yanzhengma{
+    width: 100px;
+    height: 35px;
+    background-color: #00B856;
+    float: right;
+    margin-top: -40px;
+    margin-right: 120px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 18px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

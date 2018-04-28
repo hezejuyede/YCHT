@@ -7,6 +7,154 @@ const gm = require('gm');                          //引入GM
 const ObjectId = require('mongodb').ObjectID;     //引入OjeckID模块
 
 
+
+
+
+exports.banner = (req, res, next) => {
+    mongodb.find("banner", {}, (err, result)=> {
+        if (err) {
+            res.send("err");
+        }
+        res.json(result)
+    })
+
+};
+
+exports.headerLine = (req, res, next)=> {
+    mongodb.find("headerLine", {}, (err, result)=> {
+        if (err) {
+            res.send("err");
+            return;
+        }
+        res.json(result)
+    })
+};
+
+exports.jx = (req, res, next)=> {
+    mongodb.find("jx",{},(err,result)=>{
+        if(err){
+            res.send(err)
+        }else {
+            res.json(result)
+        }
+    })
+};
+
+exports.recommend = (req, res, next)=> {
+    mongodb.find("recommend", {}, (err, result)=> {
+        if (err) {
+            res.send("err");
+            return;
+        }
+        res.json(result)
+    })
+};
+
+exports.tuijian = (req, res, next)=> {
+    mongodb.find("Tuijian", {}, (err, result)=> {
+        if (err) {
+            res.send("err");
+            return;
+        }
+        res.json(result)
+    })
+
+};
+
+exports.hotSell = (req, res, next)=> {
+    mongodb.find("hotSell",{},(err,result)=>{
+        if(err){
+            res.send(err);
+        }
+        else {
+            res.json(result)
+        }
+
+    })
+};
+
+exports.chujian = (req, res, next)=> {
+    mongodb.find("ChuJian",{},(err,result)=>{
+        if(err){
+            res.send(err);
+        }
+        else {
+            res.json(result)
+        }
+
+
+
+    })
+};
+
+exports.search = (req, res, next)=> {
+    mongodb.find("search",{},(err,result)=>{
+        if(err){
+            res.send(err)
+        }
+        else {
+            res.json(result)
+        }
+    })
+};
+
+exports.hot = (req, res, next) => {
+    mongodb.find("hot", {}, (err, result) => {
+        if(err){
+            res.send(err)
+        }
+        else {
+            res.json(result)
+        }
+
+    })
+};
+
+
+
+
+exports.MuserInfos = (req, res, next)=> {
+    res.json(mUserInfos);
+};
+
+exports.searchGoods = (req,res,next)=>{
+
+};
+
+exports.goodsList = (req, res, next) => {
+    mongodb.find('P-ProductList', {}, ((err, result) => {
+        res.json(result);
+    }))
+};
+
+exports.MobileGoodsDetails = (req, res, next) => {
+    let id = req.query.id;
+    let index = req.query.index;
+    if (id === undefined || index === undefined) {
+        res.json("-1")
+    }
+    else {
+        mongodb.find('P-ProductList', {id: id}, ((err, result) => {
+            if (err) {
+                res.json("-1")
+            }
+            else {
+
+                let goods = result[0].goodsImg;
+                let goodsDetails = goods[index];
+                console.log(goodsDetails);
+
+                res.json(goodsDetails);
+            }
+
+        }))
+    }
+
+};
+
+
+
+
 exports.MNavBarNewRec = (req, res, next) => {
     mongodb.find('C-newRec', {}, (err, result) => {
         if (err) {
@@ -163,6 +311,7 @@ exports.mobileNearby = (req, res, next) => {
     })
 
 };
+
 
 
 

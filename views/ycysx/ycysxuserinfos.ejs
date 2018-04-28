@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="亿成优生鲜(www.yanjina.top)亿成优生鲜鲁西南唯一官方网上生鲜商城，中国领先的专业生鲜网购平台.7大系列产品，鸡、鸭分割系列、猪系列、水产品、调理品、火锅产品、面点等7大系列1000种商品；更低价格，更快送达，为您提供便捷、诚信的服务.">
+    <meta name="Keywords" content="亿成,亿成优生鲜,生鲜,生鲜官方旗舰店,生鲜网上商城,鸡,鸭分割系列,猪系列,水产品,调理品,火锅产品,面点">
+    <meta property="qc:admins" content="2500556177677556375636">
+    <meta name="applicable-device" content="pc">
+    <meta name="data-code" content="sy">
+    <meta http-equiv="mobile-agent"  content="format=xhtml; url=//m.yanjina.top">
+    <meta http-equiv="mobile-agent"  content="format=html5; url=//m.yanjina.top">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="//">
+    <title>用户信息</title>
+    <link rel="stylesheet" type="text/css" href="../ycysx/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../ycysx/css/icon/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../ycysx/css/userinfos.css">
+</head>
+<body>
+<% include ycysxheader.ejs%>
+<main class="w userinfos-main">
+    <div class="userinfos-main-top">
+        <div class="userinfos-main-top-avatar">
+            <form action="/upavatar" method="post" enctype="multipart/form-data">
+                <p class="userinfos-main-top-avatar-p"><img src="../avatar/<%= useravatar %>"></p>
+                <label>
+                    <input type="file" name="touxiang" style="display: none" ></br>
+                    <i class="iconfont icon-zhaoxiangji"></i>
+                </label>
+                <button class="indexbtn" id="imgbtn" type="submit">提交修改</button>
+            </form>
+        </div>
+        <div class="userinfos-main-top-infos number1">
+            <span class="">用户名：<%= username %></span></br>
+            <span class="">昵  称：<%= name %></span></br>
+            <span class="">性  别：<%= sex %></span></br>
+            <span class="">年  龄：<%= age %></span></br>
+            <span class="">电  话：<%= phone %></span></br>
+            <span class="">邮  箱：<%= email %></span></br>
+            <button id="clickxinxi">修改信息</button>
+        </div>
+        <div class="userinfos-main-top-infos number2">
+            <span >昵  称：</span><input type="text" placeholder="输入修改昵称" value="<%= name %>" id="userID"></br>
+            <span >性  别：</span><input type="text" placeholder="输入修改性别" value="<%= sex %>" id="usersex"></br>
+            <span >年  龄：</span><input type="text" placeholder="输入修改年龄" value="<%= age %>" id="userage"></br>
+            <span >电  话：</span><input type="text" placeholder="输入修改电话" value="<%= phone %>" id="userphone"></br>
+            <span >邮  箱：</span><input type="text" placeholder="输入修改邮箱" value="<%= email %>" id="useremail"></br>
+            <button type="button" id="clickxiugai">点击修改</button>
+            <button id="backhome">返回首页</button>
+        </div>
+        <div class="userinfos-main-top-goodsorder">
+            <a href="" class="">
+                <i class="iconfont icon-weifukuan"></i>
+                <span class="">待付款</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-fukuan1"></i>
+                <span class="">已付款</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-dengdai-copy"></i>
+                <span class="">待发货</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-shouhuo"></i>
+                <span class="">已发货</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-yijingguanbi"></i>
+                <span class="">已关闭</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-tuihuotuikuan"></i>
+                <span class="">待退款</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-ccgl-tuihuosunyi-7"></i>
+                <span class="">已经退款/退货</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-chulizhong"></i>
+                <span class="">待商家确认</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-pingjia-copy"></i>
+                <span class="">待评价</span>
+            </a>
+            <a href="" class="">
+                <i class="iconfont icon-quxiaodingdan"></i>
+                <span class="">已评价</span>
+            </a>
+        </div>
+    </div>
+    <div class="userinfos-main-center">
+      <div class="userinfos-main-center-top">
+        <a class="">我的订单详情</a>
+        <a href="" class="">查看全部订单</a>
+      </div>
+    </div>
+    <div class="userinfos-main-bottom">
+        <div class="">
+            <img src="" alt="" class="">
+        </div>
+
+    </div>
+</main>
+<% include ycysxfooter.ejs%>
+<script type="text/javascript" src="../lib/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/public.js"></script>
+<script type="text/javascript" src="../ycysx/js/userinfos.js"></script>
+</body>
+</html>

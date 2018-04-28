@@ -123,6 +123,7 @@ exports.shoppingCart = (req, res, next) => {
 
     }
 };
+
 exports.MobileUserAddProduct = (req, res, next) => {
     if (req.session.login != "1") {
 
@@ -149,7 +150,32 @@ exports.MobileUserAddProduct = (req, res, next) => {
     }
 };
 
+exports.JQUserAddProduct = (req, res, next) => {
+    if (req.session.login != "1") {
 
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        let username = req.session.username;
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let shoppingCart = fields.shoppingCart;
+            shoppingCart=JSON.parse(shoppingCart.substr(1, shoppingCart.length));
+            mongodb.updateMany('userinfos',
+                {"username": username},
+                {$set: {"shoppingCart": shoppingCart}},
+                (err, result) => {
+                    if (err) {
+                        res.json('-1')
+                    }
+                    else {
+                        res.json("1")
+                    }
+                })
+
+        })
+    }
+};
 
 exports.setFollowGoods = (req, res, next) => {
     if (req.session.login !== "1") {
@@ -227,6 +253,7 @@ exports.setFollowGoods = (req, res, next) => {
 
     }
 };
+
 exports.getFollowGoods = (req, res, next) => {
     if (req.session.login !== "1") {
 
@@ -250,6 +277,7 @@ exports.getFollowGoods = (req, res, next) => {
 
     }
 };
+
 exports.deleteFollowGoods = (req, res, next) => {
     if (req.session.login !== "1") {
 
@@ -407,6 +435,72 @@ exports.getUserAddressList = (req, res, next) => {
     }
 };
 
+exports.PCsetUserAddressList = (req, res, next) => {
+    if (req.session.login != "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let name = fields.name;
+            let phone = fields.phone;
+            let citys = fields.citys;
+            let cityDetails = fields.cityDetails;
+            let address = {
+                name:name,
+                phone:phone,
+                citys:citys,
+                cityDetails:cityDetails
+            };
+
+            let username = req.session.username;
+            mongodb.find('userinfos', {"username": username}, (err, result) => {
+                if (err) {
+                    res.json('-1')
+                }
+                else {
+                    let addressList = result[0].address;
+                    if(addressList.length>0){
+                        addressList.push(address);
+                        mongodb.updateMany('userinfos',
+                            {"username": username},
+                            {$set: {"address": addressList}},
+                            (err, result) => {
+                                if (err) {
+                                    res.json('-1')
+                                }
+                                else {
+                                    res.json("1")
+                                }
+                            })
+                    }
+                    else {
+                        let addressList = [];
+                        addressList.push(address);
+                        mongodb.updateMany('userinfos',
+                            {"username": username},
+                            {$set: {"address": addressList}},
+                            (err, result) => {
+                                if (err) {
+                                    res.json('-1')
+                                }
+                                else {
+                                    res.json("1")
+                                }
+                            })
+                    }
+
+                }
+            })
+
+
+        })
+    }
+};
+
+
 exports.setUserAddressList = (req, res, next) => {
     if (req.session.login != "1") {
 
@@ -417,6 +511,7 @@ exports.setUserAddressList = (req, res, next) => {
         const form = new formidable.IncomingForm();
         form.parse(req, function (err, fields) {
             let address = fields.address;
+            console.log(fields.address)
             let username = req.session.username;
             mongodb.find('userinfos', {"username": username}, (err, result) => {
                 if (err) {
@@ -426,7 +521,6 @@ exports.setUserAddressList = (req, res, next) => {
                     let addressList = result[0].address;
                     if(addressList.length>0){
                         addressList.push(address);
-                        console.log(addressList);
                         mongodb.updateMany('userinfos',
                             {"username": username},
                             {$set: {"address": addressList}},
@@ -898,11 +992,134 @@ exports.UserChangePassWord = (req, res, next) => {
 };
 
 
+exports.UserChatList = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let username = req.session.username;
+            let chatMessage = fields.chatMessage;
+            mongodb.find("userinfos", {"username": username}, (err, result) => {
+                if(err){
+                    console.log(err)
+                }
+                else {
+                    let chatList =result[0].chatList
+                    chatList = chatMessage;
+                    mongodb.updateMany('userinfos', {"username": username},
+                        {
+                            $set: {"chatList": chatList}
+                        },
+                        (err, result) => {
+                            if (err) {
+                                console.log(err)
+                            }
+                            else {
+
+                                res.json("1")
+
+                            }
+                        }
+                    )
+
+                }
 
 
 
+            })
 
 
+        })
+    }
+};
 
 
+exports.getUserChatList = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let username = req.session.username;
+            let chatMessage = req.session.chatMessage;
+            mongodb.find("userinfos", {"username": username}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    let a = result[0].chatList;
+                    for (let i = 0; i < a.length; i++) {
+                        if (a[i].state === "2") {
+                            a[i].state = "1"
+                        }
+                    }
+                    mongodb.updateMany('userinfos', {"username": username},
+                        {
+                            $set: {"chatList": a}
+                        },
+                        (err, result) => {
+                            if (err) {
+                                console.log(err)
+                            }
+                            else {
+                                mongodb.find("userinfos", {"username": username}, (err, result) => {
+                                    if (err) {
+                                        console.log(err)
+                                    }
+                                    else {
+                                        res.json(result[0].chatList)
+                                    }
+                                })
+
+                            }
+                        }
+                    )
+
+                }
+            })
+
+
+        })
+    }
+};
+
+
+exports.getUserWDChatList = (req, res, next) => {
+    if (req.session.login !== "1") {
+
+        res.send("只有登录才有资格查看");
+    }
+    else {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields) {
+            let username = req.session.username;
+            let chatMessage = req.session.chatMessage;
+            mongodb.find("userinfos", {"username": username}, (err, result) => {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    let a = result[0].chatList;
+                    let b=[];
+                    for (let i = 0; i < a.length; i++) {
+                        if (a[i].state === "2") {
+                            b.push(a)
+                        }
+                    }
+                    let c= b.length;
+                    res.json(c)
+                }
+
+
+            })
+
+
+        })
+    }
+};
 
